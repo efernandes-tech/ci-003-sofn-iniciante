@@ -1,4 +1,5 @@
 # ci-003-sofn-projeto
 
 # Anotações:
-- ...
+- Rodar:
+    php -S localhost:1337 -t public
