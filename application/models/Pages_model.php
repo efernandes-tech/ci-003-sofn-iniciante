@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pages_model extends CI_Model {
 
+    private $table_name = "pages";
+
     public function __construct() {
 
         parent::__construct();
@@ -11,11 +13,17 @@ class Pages_model extends CI_Model {
 
     }
 
-    public function get() {
+    public function get($id = null) {
 
-        $query = $this->db->get("pages");
+        if ($id === null) {
+            $query = $this->db->get($this->table_name);
 
-        return $query->result();
+            return $query->result();
+        }
+
+        $query = $this->db->get_where($this->table_name, array("id" => $id));
+
+        return $query->first_row();
 
     }
 
@@ -31,7 +39,7 @@ class Pages_model extends CI_Model {
             "slug" => $slug
         );
 
-        return $this->db->insert("pages", $data);
+        return $this->db->insert($this->table_name, $data);
 
     }
 
