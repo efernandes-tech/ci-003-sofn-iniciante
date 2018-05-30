@@ -2,20 +2,21 @@
 
 class AuthHook
 {
-    private $controller = [
+    private $controller = array(
         'auth'
-    ];
+    );
 
     public function check()
     {
-        $CI =&  get_instance();
+        $CI =& get_instance();
 
         if (!isset($CI->session)) {
             $CI->load->library('session');
         };
+
         $CI->load->helper('url');
 
-        $user = $CI->session->user ?? null;
+        $user = $CI->session->user ? $CI->session->user : null;
         $controller = $CI->uri->segment(1);
         if (!$user and !in_array($controller, $this->controller)) {
             redirect('auth/login', 'location', 302);
