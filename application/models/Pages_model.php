@@ -43,6 +43,27 @@ class Pages_model extends CI_Model {
 
     }
 
+    public function update($id)
+    {
+        $this->load->helper('url');
+        $slug = url_title($this->input->post('title'), 'dash', true);
+
+        $data = [
+            'title' => $this->input->post('title'),
+            'body' => $this->input->post('body'),
+            'slug' => $slug
+        ];
+
+        $this->db->where('id', $id);
+
+        return $this->db->update($this->table_name, $data);
+    }
+
+    public function delete($id)
+    {
+        return $this->db->delete($this->table_name, ['id'=>$id]);
+    }
+
 }
 
 /* End of file Pages_model.php */
