@@ -5,12 +5,9 @@ class Pages extends CI_Controller {
 
     public function index()
     {
-        echo "string1";
-    }
-
-    public function view($id = 0)
-    {
-        echo $id;
+        $this->load->view("template/header");
+        $this->load->view("pages/index", array("pages" => array()));
+        $this->load->view("template/footer");
     }
 
 }
